@@ -1,122 +1,52 @@
 <!DOCTYPE html>
 <html lang="bn">
+<head><!DOCTYPE html>
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>বিকাশ গেম প্রো</title>
+    <title>MegaWin 300+ | Official bKash Gaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: #fff; text-align: center; margin: 0; padding: 10px; }
-        .card { background: #1e293b; padding: 20px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #334155; }
-        .bkash-btn { background: #e2136e; color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 10px;}
-        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #0f172a; color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; }
-        .cell { aspect-ratio: 1; background: #334155; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.3s; }
-        .revealed { background: #10b981; } .bomb { background: #ef4444; }
-        .modal { display:none; position: fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:#1e293b; padding: 25px; border: 2px solid #e2136e; width: 85%; border-radius: 15px; z-index: 100; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        body { background: #000; color: #fff; font-family: sans-serif; }
+        .game-card { background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%); border: 1px solid #222; border-radius: 15px; overflow: hidden; transition: 0.3s; position: relative; }
+        .game-card:hover { border-color: #fbbf24; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(251, 191, 36, 0.2); }
+        .play-btn { background: #e2136e; font-size: 10px; font-weight: bold; padding: 5px 12px; border-radius: 20px; margin-top: 8px; }
+        .win-rate { font-size: 9px; color: #10b981; margin-top: 4px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body>
+<body class="pb-24">
 
-    <div class="card" id="loginArea">
-        <h2>💎 Treasure Mine</h2>
-        <input type="text" id="username" placeholder="আপনার নাম লিখুন">
-        <button class="bkash-btn" onclick="login()">শুরু করুন</button>
-    </div>
-
-    <div id="mainGame" style="display:none;">
-        <div class="card">
-            <h3 id="userDisplay">ইউজার: </h3>
-            <p>ব্যালেন্স: <span id="bal" style="color:#fbbf24; font-size: 1.5rem;">500</span> 💰</p>
-            <div style="display:flex; gap:10px;">
-                <button onclick="showModal('depoModal')" style="flex:1; background:#10b981; border:none; color:white; padding:10px; border-radius:8px;">ডিপোজিট</button>
-                <button onclick="showModal('withModal')" style="flex:1; background:#3b82f6; border:none; color:white; padding:10px; border-radius:8px;">উইথড্র</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <input type="number" id="bet" placeholder="কত বাজি ধরবেন?">
-            <button id="startBtn" class="bkash-btn" style="background:#3b82f6;" onclick="startGame()">গেম স্টার্ট</button>
-            <button id="cashout" style="display:none; background:#10b981;" class="bkash-btn" onclick="cashout()">ক্যাশ আউট (লাভ নিন)</button>
-            <div class="grid" id="grid"></div>
+    <div class="sticky top-0 z-50 bg-black/80 backdrop-blur-md p-4 flex justify-between items-center border-b border-yellow-600/30">
+        <div><h1 class="text-2xl font-black italic text-yellow-500 uppercase">MegaWin</h1></div>
+        <div class="bg-gray-900 px-4 py-2 rounded-2xl border border-yellow-600/20 text-center">
+            <p class="text-[8px] text-gray-400 uppercase">ব্যালেন্স</p>
+            <p class="text-xl font-black text-white">৳<span id="bal">500</span></p>
         </div>
     </div>
 
-    <div id="depoModal" class="modal">
-        <h3>বিকাশ ডিপোজিট</h3>
-        <p style="font-size: 0.9rem; color: #ccc;">বিকাশ (Personal): <br><b style="color:#fff;">017XXXXXXXX</b> (টাকা পাঠিয়ে TrxID দিন)</p>
-        <input type="number" id="depoAmt" placeholder="টাকার পরিমাণ">
-        <input type="text" id="trxID" placeholder="TrxID দিন">
-        <button class="bkash-btn" onclick="submitRequest('Deposit')">সাবমিট</button>
-        <button onclick="closeModal('depoModal')" style="background:none; border:none; color:#aaa; margin-top:15px;">বন্ধ করুন</button>
-    </div>
-
-    <div id="withModal" class="modal">
-        <h3>বিকাশ উইথড্র</h3>
-        <input type="number" id="withAmt" placeholder="উইথড্র পরিমাণ">
-        <input type="text" id="withPhone" placeholder="বিকাশ নম্বর">
-        <button class="bkash-btn" onclick="submitRequest('Withdraw')">উইথড্র রিকোয়েস্ট</button>
-        <button onclick="closeModal('withModal')" style="background:none; border:none; color:#aaa; margin-top:15px;">বন্ধ করুন</button>
-    </div>
+    <div class="p-4 grid grid-cols-2 gap-4" id="gameGrid"></div>
 
     <script>
-        let balance = 500, isPlaying = false, mines = [], revealed = 0, currentBet = 0;
+        const categories = ["Golden", "Dragon", "Royal", "Mega", "Super", "Lucky", "Fire", "Diamond", "Vegas", "Rich"];
+        const gameTypes = ["Slots", "Empire", "Fortune", "Mines", "King", "Strike", "Rush", "Winner", "Dice", "Wheel"];
+        const icons = ["🎰", "💎", "🎲", "👑", "🚀", "💰", "🦁", "🔥", "🃏", "⚡"];
+        const gameGrid = document.getElementById('gameGrid');
 
-        function showModal(id) { document.getElementById(id).style.display = 'block'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function login() {
-            let name = document.getElementById('username').value;
-            if(!name) return alert("নাম দিন!");
-            document.getElementById('userDisplay').innerText = "ইউজার: " + name;
-            document.getElementById('loginArea').style.display = 'none';
-            document.getElementById('mainGame').style.display = 'block';
-        }
-
-        function submitRequest(type) {
-            alert(type + " রিকোয়েস্ট অ্যাডমিনের কাছে পাঠানো হয়েছে। ৫ মিনিটে কাজ হবে।");
-            closeModal('depoModal'); closeModal('withModal');
-        }
-
-        function startGame() {
-            currentBet = parseInt(document.getElementById('bet').value);
-            if(currentBet > balance || isNaN(currentBet) || currentBet <= 0) return alert("সঠিক বাজি ধরুন!");
-            
-            isPlaying = true; revealed = 0; mines = [];
-            while(mines.length < 4) { 
-                let r = Math.floor(Math.random()*25); 
-                if(!mines.includes(r)) mines.push(r); 
-            }
-            
-            document.getElementById('grid').innerHTML = '';
-            for(let i=0; i<25; i++) {
-                let c = document.createElement('div'); c.className = 'cell';
-                c.onclick = () => {
-                    if(!isPlaying) return;
-                    if(mines.includes(i)) { 
-                        c.className = 'cell bomb'; c.innerText = '💣'; 
-                        isPlaying = false; balance -= currentBet; 
-                        document.getElementById('bal').innerText = balance;
-                        document.getElementById('cashout').style.display = 'none';
-                        setTimeout(() => alert("বোমা ফুটেছে! আপনি হেরেছেন।"), 100);
-                    } else { 
-                        c.className = 'cell revealed'; c.innerText = '💎'; 
-                        revealed++; 
-                        document.getElementById('cashout').style.display = 'block';
-                    }
-                };
-                document.getElementById('grid').appendChild(c);
-            }
-        }
-
-        function cashout() {
-            isPlaying = false;
-            let winAmt = currentBet * (1 + (revealed * 0.3));
-            balance += (winAmt - currentBet);
-            document.getElementById('bal').innerText = Math.floor(balance);
-            alert("জিতেছেন: " + Math.floor(winAmt) + " কয়েন!");
-            document.getElementById('cashout').style.display = 'none';
-            document.getElementById('grid').innerHTML = '';
+        for (let i = 1; i <= 300; i++) {
+            let name = categories[Math.floor(Math.random() * categories.length)] + " " + gameTypes[Math.floor(Math.random() * gameTypes.length)];
+            let icon = icons[Math.floor(Math.random() * icons.length)];
+            let winRate = (Math.random() * (15 - 5) + 5).toFixed(1);
+            gameGrid.innerHTML += `
+                <div onclick="alert('${name} গেমটি লোড হচ্ছে...')" class="game-card p-4 flex flex-col items-center justify-center text-center h-48">
+                    <div class="text-5xl mb-3">${icon}</div>
+                    <h3 class="text-[11px] font-black uppercase text-gray-200">${name} ${i+100}</h3>
+                    <p class="win-rate font-bold">জয়ের হার: ${winRate}%</p>
+                    <button class="play-btn">Play Now</button>
+                </div>`;
         }
     </script>
 </body>
 </html>
+        
