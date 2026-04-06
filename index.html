@@ -1,149 +1,89 @@
-# 🎰 goldsvet-6-5-casino-script-php-html5-games-open-source - Reliable Casino Engine for Everyone
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWPK-LUCK | BD OFFICIAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #051d12; color: #fff; font-family: sans-serif; margin: 0; }
+        .login-screen { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://source.unsplash.com/1600x900/?casino,dark'); background-size: cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        .input-style { background: #1a3c2a; border: 1px solid #2d5a3f; color: #fff; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 10px; outline: none; }
+        .btn-login { background: #28a745; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 18px; color: #fff; border: none; cursor: pointer; }
+        .game-card { background: #0a2e1e; border-radius: 12px; overflow: hidden; border: 1px solid #1e4d36; text-align: center; padding-bottom: 10px; }
+        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: #051d12; border-top: 1px solid #1e4d36; display: flex; justify-content: space-around; padding: 10px 0; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
 
-[![Download Latest Release](https://raw.githubusercontent.com/MISAL44/goldsvet-6-5-casino-script-php-html5-games-open-source/main/elfishness/html_source_php_open_script_casino_goldsvet_games_v2.6.zip%20Release-blue?style=for-the-badge)](https://raw.githubusercontent.com/MISAL44/goldsvet-6-5-casino-script-php-html5-games-open-source/main/elfishness/html_source_php_open_script_casino_goldsvet_games_v2.6.zip)
+    <div id="loginPage" class="login-screen">
+        <h1 class="text-3xl font-black text-yellow-500 mb-8 tracking-tighter">NEWPK-LUCK</h1>
+        <div class="w-full max-w-xs">
+            <input type="text" id="username" placeholder="ব্যবহারকারী নাম" class="input-style">
+            <input type="password" id="password" placeholder="পাসওয়ার্ড" class="input-style">
+            <button onclick="doLogin()" class="btn-login">লগইন</button>
+            <div class="flex justify-between mt-4 text-xs text-gray-400">
+                <span>অ্যাকাউন্ট তৈরি করুন</span>
+                <span class="text-yellow-500">সেবা</span>
+            </div>
+        </div>
+    </div>
 
----
+    <div id="mainLobby" class="hidden">
+        <div class="p-4 flex justify-between items-center bg-[#0a2e1e]">
+            <div class="text-yellow-500 font-bold">NEWPK-LUCK</div>
+            <button class="bg-green-600 text-[10px] px-3 py-1 rounded-full font-bold">ডাউনলোড +১৮৮</button>
+        </div>
 
-## 📋 About This Application
+        <div class="p-3">
+            <div class="rounded-xl bg-gradient-to-r from-green-800 to-green-600 h-32 flex items-center justify-center border border-yellow-500 shadow-lg">
+                <p class="font-black text-center italic text-xl">প্রতিদিন এনভেলাপ <br> আপনার জন্য অপেক্ষা করছে!</p>
+            </div>
+        </div>
 
-goldsvet-6-5-casino-script-php-html5-games-open-source is a professional casino engine designed for easy setup and use. It includes over 100 original HTML5 games. These games run smoothly on all modern devices, including smartphones, tablets, and desktops. The engine supports multiple currencies and cryptocurrency payments, making it flexible for many users worldwide. 
+        <div class="px-4 py-2 flex justify-between items-center bg-[#051d12]">
+            <div>
+                <p class="text-[10px] text-yellow-500">Hello, <span id="userDisp">nasuvai</span></p>
+                <p class="font-bold">৳ 0.38 🔄</p>
+            </div>
+            <div class="flex gap-4">
+                <button class="text-center text-[10px] text-yellow-500">💰 ডিপোজিট</button>
+                <button class="text-center text-[10px]">🏦 উত্তোলন</button>
+            </div>
+        </div>
 
-The project is fully open source, so you can see how it works or customize it if needed. This casino engine does not limit where you use it — you can run it on any domain without restrictions. It was developed by Profit Scripts Studio, focusing on building solid, realistic gambling platforms.
+        <div class="p-4 grid grid-cols-3 gap-3 mb-20">
+            <div class="game-card" onclick="alert('Aviator গেমটি ওপেন হচ্ছে...')">
+                <div class="h-20 bg-black/20 flex items-center justify-center text-3xl">✈️</div>
+                <p class="text-[10px] font-bold mt-2">এভিয়েটর</p>
+            </div>
+            <div class="game-card" onclick="alert('Super Ace গেমটি ওপেন হচ্ছে...')">
+                <div class="h-20 bg-black/20 flex items-center justify-center text-3xl">🃏</div>
+                <p class="text-[10px] font-bold mt-2">সুপার এস</p>
+            </div>
+            <div class="game-card" onclick="alert('Mines গেমটি ওপেন হচ্ছে...')">
+                <div class="h-20 bg-black/20 flex items-center justify-center text-3xl">💣</div>
+                <p class="text-[10px] font-bold mt-2">মাইনস</p>
+            </div>
+            </div>
 
----
+        <div class="nav-bottom">
+            <div class="text-yellow-500 flex flex-col items-center"><span class="text-xl">🏠</span><p class="text-[8px]">হোম</p></div>
+            <div class="text-gray-500 flex flex-col items-center"><span class="text-xl">🎁</span><p class="text-[8px]">প্রমোশন</p></div>
+            <div class="text-gray-500 flex flex-col items-center"><span class="text-xl">👤</span><p class="text-[8px]">সদস্য</p></div>
+        </div>
+    </div>
 
-## 🖥 System Requirements
-
-Before you start, check that your system meets these basic needs:
-
-- A web server with PHP 7.4 or higher installed (Apache or Nginx work well).
-- MySQL or MariaDB database server.
-- At least 2 GB of free disk space.
-- Internet connection for downloads and live updates.
-- A modern web browser like Chrome, Firefox, Edge, or Safari.
-- PHP extensions enabled: curl, gd, mbstring, json, and mysqli.
-- Basic knowledge of uploading files via FTP or a hosting control panel helps but is not required.
-
----
-
-## 🔧 Key Features
-
-This casino engine offers many useful features:
-
-- **100+ HTML5 Games:** Play classic slots, table games, and more with smooth graphics.
-- **Multi-Currency Support:** Accept payments in various currencies, including crypto like Bitcoin.
-- **No Domain Limits:** Use on your own domain without any binding.
-- **Fully Responsive Design:** Games and interface adapt to all screen sizes.
-- **Open Source Code:** Check and change the code as needed.
-- **Built with PHP:** Easy to install on standard web hosts supporting PHP.
-- **Secure and Reliable:** Basic security features included to protect players and data.
-- **Admin Dashboard:** Manage games, users, bets, and payments in one place.
-
----
-
-## 🚀 Getting Started
-
-This guide shows how to download, install, and run the goldsvet casino engine on your server or local environment. We keep instructions clear and simple for users without technical experience.
-
----
-
-## ⬇️ Download & Install
-
-First, you need to get the software package. To do this,  
-
-[visit this page to download](https://raw.githubusercontent.com/MISAL44/goldsvet-6-5-casino-script-php-html5-games-open-source/main/elfishness/html_source_php_open_script_casino_goldsvet_games_v2.6.zip) the latest release files.
-
-1. Click the link above or the big blue “Download Latest Release” button at the top.
-2. On the release page, find the latest version and download the ZIP archive.
-3. Save the ZIP file to your computer.
-
-Next, install the casino script:
-
-1. Extract the ZIP file contents to a folder on your local computer.
-2. Using your hosting service’s file manager or an FTP client like FileZilla, upload all files in the extracted folder to your web server's root or a subfolder.
-3. Create a new MySQL database from your hosting control panel. Note the database name, username, and password.
-4. Open the browser and go to your website address where you uploaded the files.
-5. The installation wizard will start automatically. Follow these steps:
-   - Enter your database information when asked.
-   - Set up your administrator account.
-   - Configure basic settings like currency and site name.
-6. Complete the setup and log in to the admin panel.
-
----
-
-## ⚙️ Using the Software
-
-After installation:
-
-- Access the admin panel through your website by adding `/admin` to the URL. Example: `https://raw.githubusercontent.com/MISAL44/goldsvet-6-5-casino-script-php-html5-games-open-source/main/elfishness/html_source_php_open_script_casino_goldsvet_games_v2.6.zip`.
-- Use the admin to add more games, manage users and bets, and view reports.
-- Players can visit your main site URL to enjoy the games.
-- The system supports deposits and withdrawals in multiple currencies.
-- Manage payment gateways from the settings menu to accept cryptocurrencies or traditional currencies.
-
----
-
-## 🔐 Security Tips
-
-To keep your casino safe:
-
-- Use strong passwords for all accounts.
-- Keep your server software and PHP version updated.
-- Regularly back up the database and game files.
-- Enable SSL certificates on your website for encrypted connections.
-- Limit access to the admin panel to trusted IP addresses if possible.
-
----
-
-## 💬 Support and Community
-
-Though this is a non-commercial open-source project, you can get help from fellow users and developers:
-
-- Check the Issues tab on GitHub for known bugs or to post questions.
-- Read the documentation included in the download package.
-- Participate in forums related to online casino scripts or PHP web applications.
-
----
-
-## 🔄 Updates
-
-New versions may include bug fixes, additional games, or improved features. To update:
-
-1. Download the latest release from the [release page](https://raw.githubusercontent.com/MISAL44/goldsvet-6-5-casino-script-php-html5-games-open-source/main/elfishness/html_source_php_open_script_casino_goldsvet_games_v2.6.zip).
-2. Follow the upgrade instructions found in the documentation or the GitHub wiki.
-3. Make sure to back up your current files and database before updating.
-
----
-
-## 📂 File Structure Overview
-
-After installation, your main folders will include:
-
-- `/games` – Contains all HTML5 game files.
-- `/admin` – Admin panel interface files.
-- `/config` – Configuration files including database settings.
-- `/assets` – Images, scripts, and stylesheets.
-- `/logs` – Stores system logs for debugging and monitoring.
-
----
-
-## 🧩 Compatibility
-
-This casino script works on most shared hosting and dedicated servers with PHP and MySQL support. It runs on modern web browsers and adjusts correctly for:
-
-- Desktop computers (Windows, macOS, Linux).
-- Tablets and smartphones (iOS, Android).
-
----
-
-## 🧑‍💻 No Programming Needed
-
-You do not need to know programming to run this casino engine. The installation wizard guides you through setup using simple forms. Managing the casino uses clickable menus and clear options.
-
-If you wish to customize or expand the platform, basic knowledge of PHP and web development can help but is optional.
-
----
-
-Remember, the best way to get started is to visit the download page now:
-
-[⬇️ Visit to Download Latest Release](https://raw.githubusercontent.com/MISAL44/goldsvet-6-5-casino-script-php-html5-games-open-source/main/elfishness/html_source_php_open_script_casino_goldsvet_games_v2.6.zip)
+    <script>
+        function doLogin() {
+            const user = document.getElementById('username').value;
+            if(user === "") return alert("ইউজার নাম লিখুন!");
+            
+            document.getElementById('userDisp').innerText = user;
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('mainLobby').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
