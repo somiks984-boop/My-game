@@ -1,52 +1,23 @@
 <!DOCTYPE html>
 <html lang="bn">
-<head><!DOCTYPE html>
-<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MegaWin 300+ | Official bKash Gaming</title>
+    <title>MegaWin 300+ LIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #000; color: #fff; font-family: sans-serif; }
-        .game-card { background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%); border: 1px solid #222; border-radius: 15px; overflow: hidden; transition: 0.3s; position: relative; }
-        .game-card:hover { border-color: #fbbf24; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(251, 191, 36, 0.2); }
-        .play-btn { background: #e2136e; font-size: 10px; font-weight: bold; padding: 5px 12px; border-radius: 20px; margin-top: 8px; }
-        .win-rate { font-size: 9px; color: #10b981; margin-top: 4px; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-    </style>
 </head>
-<body class="pb-24">
-
-    <div class="sticky top-0 z-50 bg-black/80 backdrop-blur-md p-4 flex justify-between items-center border-b border-yellow-600/30">
-        <div><h1 class="text-2xl font-black italic text-yellow-500 uppercase">MegaWin</h1></div>
-        <div class="bg-gray-900 px-4 py-2 rounded-2xl border border-yellow-600/20 text-center">
-            <p class="text-[8px] text-gray-400 uppercase">ব্যালেন্স</p>
-            <p class="text-xl font-black text-white">৳<span id="bal">500</span></p>
-        </div>
-    </div>
-
-    <div class="p-4 grid grid-cols-2 gap-4" id="gameGrid"></div>
-
+<body class="bg-black text-white text-center p-10">
+    <h1 class="text-4xl font-black text-yellow-500 mb-5 italic">CASINO HUB 300+</h1>
+    <div class="grid grid-cols-2 gap-4" id="g"></div>
     <script>
-        const categories = ["Golden", "Dragon", "Royal", "Mega", "Super", "Lucky", "Fire", "Diamond", "Vegas", "Rich"];
-        const gameTypes = ["Slots", "Empire", "Fortune", "Mines", "King", "Strike", "Rush", "Winner", "Dice", "Wheel"];
-        const icons = ["🎰", "💎", "🎲", "👑", "🚀", "💰", "🦁", "🔥", "🃏", "⚡"];
-        const gameGrid = document.getElementById('gameGrid');
-
-        for (let i = 1; i <= 300; i++) {
-            let name = categories[Math.floor(Math.random() * categories.length)] + " " + gameTypes[Math.floor(Math.random() * gameTypes.length)];
-            let icon = icons[Math.floor(Math.random() * icons.length)];
-            let winRate = (Math.random() * (15 - 5) + 5).toFixed(1);
-            gameGrid.innerHTML += `
-                <div onclick="alert('${name} গেমটি লোড হচ্ছে...')" class="game-card p-4 flex flex-col items-center justify-center text-center h-48">
-                    <div class="text-5xl mb-3">${icon}</div>
-                    <h3 class="text-[11px] font-black uppercase text-gray-200">${name} ${i+100}</h3>
-                    <p class="win-rate font-bold">জয়ের হার: ${winRate}%</p>
-                    <button class="play-btn">Play Now</button>
-                </div>`;
+        for(let i=1; i<=300; i++){
+            document.getElementById('g').innerHTML += `
+            <div class="bg-gray-900 p-5 rounded-xl border border-gray-800" onclick="alert('গেম লোড হচ্ছে...')">
+                <div class="text-3xl mb-2">🎰</div>
+                <p class="text-[10px] font-bold">GAME #${i+100}</p>
+                <button class="mt-2 bg-pink-600 px-3 py-1 rounded text-[8px] font-bold">PLAY NOW</button>
+            </div>`;
         }
     </script>
 </body>
 </html>
-        
