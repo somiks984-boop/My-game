@@ -3,21 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MegaWin 300+ LIVE</title>
+    <title>CASINO HUB 300+ | OFFICIAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #0b0e14; color: #fff; font-family: sans-serif; }
+        .game-card { background: #1a202c; border: 1px solid #2d3748; border-radius: 15px; transition: 0.3s; cursor: pointer; }
+        .game-card:hover { border-color: #f59e0b; transform: scale(1.02); }
+        .grid-cell { aspect-ratio: 1; background: #2d3748; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; }
+        .hidden { display: none; }
+    </style>
 </head>
-<body class="bg-black text-white text-center p-10">
-    <h1 class="text-4xl font-black text-yellow-500 mb-5 italic">CASINO HUB 300+</h1>
-    <div class="grid grid-cols-2 gap-4" id="g"></div>
+<body class="p-4 pb-20">
+
+    <div id="lobby">
+        <div class="flex justify-between items-center mb-6 bg-gray-900 p-4 rounded-2xl border-b-2 border-yellow-500">
+            <h1 class="text-xl font-black text-yellow-500">MEGA CASINO 300</h1>
+            <div class="text-right"><p class="text-[10px] text-gray-400">ব্যালেন্স</p><p class="text-lg font-bold text-green-400">৳<span id="bal">500</span></p></div>
+        </div>
+        
+        <h2 class="font-bold mb-4">সবগুলো গেম (৩০০+)</h2>
+        <div class="grid grid-cols-2 gap-4" id="gameList">
+            </div>
+    </div>
+
+    <div id="gamePlay" class="hidden text-center">
+        <button onclick="backToLobby()" class="mb-4 text-xs text-gray-500">⬅ পিছনে যান</button>
+        <h2 id="currentGameName" class="text-2xl font-black mb-4 text-yellow-500">TREASURE MINES</h2>
+        <div class="bg-gray-900 p-6 rounded-3xl border border-gray-800">
+            <input type="number" id="bet" placeholder="বাজি ধরুন" class="w-full p-3 rounded-lg bg-black border border-gray-700 mb-4 text-center">
+            <div class="grid grid-cols-5 gap-2 mb-4" id="mineGrid"></div>
+            <button id="btnStart" onclick="startGame()" class="w-full p-4 bg-blue-600 rounded-xl font-bold uppercase">গেম শুরু</button>
+            <button id="btnCash" onclick="cashOut()" class="hidden w-full p-4 bg-green-600 rounded-xl font-bold mt-2 uppercase">টাকা তুলে নিন</button>
+        </div>
+    </div>
+
     <script>
-        for(let i=1; i<=300; i++){
-            document.getElementById('g').innerHTML += `
-            <div class="bg-gray-900 p-5 rounded-xl border border-gray-800" onclick="alert('গেম লোড হচ্ছে...')">
-                <div class="text-3xl mb-2">🎰</div>
-                <p class="text-[10px] font-bold">GAME #${i+100}</p>
-                <button class="mt-2 bg-pink-600 px-3 py-1 rounded text-[8px] font-bold">PLAY NOW</button>
-            </div>`;
+        let balance = 500;
+        let isMinesActive = false, bombs = [], revealed = 0, currentBet = 0;
+        const gNames = ["Dragon Slots", "Treasure Mines", "Lucky Spin", "Fruit Crush", "Dice Roll", "King Card", "Gold Rush", "Mega Wheel"];
+        const icons = ["🎰", "💣", "🎡", "🍓", "🎲", "🃏", "💰", "⚡"];
+
+        // ৩০০ গেমের তালিকা তৈরি
+        const list = document.getElementById('gameList');
+        for(let i=0; i<300; i++) {
+            let name = gNames[i % 8];
+            let icon = icons[i % 8];
+            list.innerHTML += `
+                <div onclick="openGame('${name}')" class="game-card p-4 text-center">
+                    <div class="text-4xl mb-2">${icon}</div>
+                    <p class="text-[10px] font-bold uppercase tracking-tighter">${name} ${i+100}</p>
+                    <button class="mt-2 text-[8px] bg-yellow-600 text-black px-3 py-1 rounded-full font-black">PLAY NOW</button>
+                </div>`;
         }
+
+        function openGame(name) {
+            document.getElementById('lobby').classList.add('hidden');
+            document.getElementById('gamePlay').classList.remove('hidden');
+            document.getElementById('currentGameName').innerText = name;
+            resetGrid();
+        }
+
+        function backToLobby() {
+            document.getElementById('lobby').classList.remove('hidden');
+            document.getElementById('gamePlay').classList.add('hidden');
+        }
+
+        function resetGrid() {
+            const grid = document.getElementById('mineGrid');
+            grid.innerHTML = '';
+            for(let i=0; i<25; i++) {
+                let c = document.createElement('div'); c.className = 'grid-cell';
+                c.innerText = '?';
+                c.onclick = () => revealCell(i, c);
+                grid.appendChild(c);
+            }
+        }
+
+        function startGame() {
+            currentBet = parseInt(document.getElementById('bet').value);
+            if(isNaN(currentBet) || currentBet > balance || currentBet <= 0) return alert("সঠিক বাজি ধরুন!");
+            
+            isMinesActive = true; revealed = 0; bombs = [];
+            while(bombs.length < 8) { // ৮টি বোমা মানে হারার চান্স বেশি
+                let r = Math.floor(Math.random()*25);
+                if(!bombs.includes(r)) bombs.push(r);
+            }
+            resetGrid();
+            document.getElementById('btnStart').classList.add('hidden');
+            document.getElementById('btnCash').classList.add('hidden');
+        }
+
+        function revealCell(idx, el) {
+            if(!isMinesActive) return;
+            if(bombs.includes(idx)) {
+                el.innerText = '💣'; el.style.background = 'red';
+                balance -= currentBet; updateBal();
+                isMinesActive = false;
+                alert("বোমা! আপনি হেরেছেন।");
+                document.getElementById('btnStart').classList.remove('hidden');
+            } else {
+                el.innerText = '💎'; el.style.background = 'green';
+                revealed++;
+                document.getElementById('btnCash').classList.remove('hidden');
+            }
+        }
+
+        function cashOut() {
+            let win = currentBet * (1 + (revealed * 0.2));
+            balance += (win - currentBet); updateBal();
+            isMinesActive = false;
+            alert("অভিনন্দন! আপনি জিতেছেন ৳" + Math.floor(win));
+            document.getElementById('btnStart').classList.remove('hidden');
+            document.getElementById('btnCash').classList.add('hidden');
+        }
+
+        function updateBal() { document.getElementById('bal').innerText = Math.floor(balance); }
     </script>
 </body>
 </html>
