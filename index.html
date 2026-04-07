@@ -1,119 +1,21 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW PK LUCK | Official Lobby</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #062b1a; color: white; font-family: sans-serif; margin: 0; padding: 0; }
-        .header { background: #041d11; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1a4d36; }
-        .btn-green { background: linear-gradient(180deg, #28a745, #1e7e34); padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; }
-        .banner-slider { width: 100%; height: 160px; background: url('https://i.ibb.co/S7m4v8W/banner.jpg') center/cover; margin-top: 5px; border-radius: 10px; border: 1px solid #fbbf24; }
-        .category-bar { display: flex; overflow-x: auto; gap: 15px; padding: 15px; background: #062b1a; white-space: nowrap; }
-        .category-item { text-align: center; min-width: 60px; }
-        .category-item img { width: 35px; margin: 0 auto; opacity: 0.7; }
-        .category-item.active img { opacity: 1; filter: drop-shadow(0 0 5px #fbbf24); }
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 10px; margin-bottom: 70px; }
-        .game-card { background: #0a3d26; border-radius: 10px; border: 1px solid #1a4d36; overflow: hidden; text-align: center; padding-bottom: 5px; transition: 0.2s; }
-        .game-card:active { transform: scale(0.9); border-color: #fbbf24; }
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #041d11; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #1a4d36; }
-        .nav-item { text-align: center; font-size: 10px; color: #888; }
-        .nav-item.active { color: #fbbf24; }
-        ::-webkit-scrollbar { display: none; }
-    </style>
+<title>Tap Game</title>
 </head>
-<body class="max-w-[450px] mx-auto shadow-2xl min-h-screen relative">
+<body style="text-align:center">
 
-    <div class="header">
-        <div class="flex items-center gap-2">
-            <img src="https://i.ibb.co/S7m4v8W/logo.png" alt="logo" class="w-8">
-            <span class="text-yellow-500 font-black italic text-lg">NEW PK LUCK</span>
-        </div>
-        <div class="flex gap-2">
-            <button class="text-xs font-bold border border-green-500 px-3 py-1 rounded-full" onclick="goLink()">LOGIN</button>
-            <button class="btn-green" onclick="goLink()">REGISTER</button>
-        </div>
-    </div>
+<h1>Tap Game</h1>
+<button onclick="add()">Tap Me</button>
+<h2 id="score">0</h2>
 
-    <div class="px-3">
-        <div class="banner-slider flex items-center justify-center">
-            <p class="text-center font-black text-yellow-400 drop-shadow-md text-sm">প্রতিদিন রেড এনভেলাপ <br> আপনার জন্য অপেক্ষা করছে!</p>
-        </div>
-    </div>
+<script>
+let s = 0;
+function add(){
+s++;
+document.getElementById("score").innerText = s;
+}
+</script>
 
-    <div class="category-bar">
-        <div class="category-item active">
-            <div class="text-2xl">🔥</div>
-            <p class="text-[10px] mt-1">HOT</p>
-        </div>
-        <div class="category-item">
-            <div class="text-2xl">🎰</div>
-            <p class="text-[10px] mt-1">SLOTS</p>
-        </div>
-        <div class="category-item">
-            <div class="text-2xl">🏏</div>
-            <p class="text-[10px] mt-1">CRICKET</p>
-        </div>
-        <div class="category-item">
-            <div class="text-2xl">🃏</div>
-            <p class="text-[10px] mt-1">LIVE</p>
-        </div>
-        <div class="category-item">
-            <div class="text-2xl">💣</div>
-            <p class="text-[10px] mt-1">MINES</p>
-        </div>
-    </div>
-
-    <div class="game-grid" id="gameBox">
-        </div>
-
-    <div class="bottom-nav">
-        <div class="nav-item active">
-            <span class="text-xl block">🏠</span>
-            <span>HOME</span>
-        </div>
-        <div class="nav-item">
-            <span class="text-xl block">🎁</span>
-            <span>PROMO</span>
-        </div>
-        <div class="nav-item">
-            <span class="text-xl block">👥</span>
-            <span>REFER</span>
-        </div>
-        <div class="nav-item">
-            <span class="text-xl block">👤</span>
-            <span>ACCOUNT</span>
-        </div>
-    </div>
-
-    <script>
-        // আপনার পার্টনার লিঙ্কটি নিচের কোটেশনের ভেতর দিন
-        const affiliateLink = "https://mostbet-partners.com/registration?ref=your_id"; 
-
-        function goLink() {
-            window.location.href = affiliateLink;
-        }
-
-        function loadGames() {
-            const box = document.getElementById('gameBox');
-            const icons = ["🛩️", "🐯", "💎", "🍭", "⚽", "🃏", "🍬", "🐉", "🔱"];
-            const names = ["Aviator", "Fortune Tiger", "Gems", "Sweet Bonanza", "Saba Sports", "Super Ace", "Mines", "Dragon", "Gate of Olympus"];
-            
-            for(let i=0; i<300; i++) {
-                box.innerHTML += `
-                    <div class="game-card" onclick="goLink()">
-                        <div class="h-24 flex items-center justify-center text-4xl bg-black/20">
-                            ${icons[i % 9]}
-                        </div>
-                        <p class="text-[9px] font-bold mt-2 truncate px-1 uppercase">${names[i % 9]}</p>
-                        <p class="text-[7px] text-green-400">Winning: 98%</p>
-                    </div>
-                `;
-            }
-        }
-        
-        loadGames();
-    </script>
 </body>
 </html>
