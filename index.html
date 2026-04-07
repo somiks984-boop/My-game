@@ -3,133 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW-Bet| Official VIP</title>
+    <title>NEW PK LUCK | Official Lobby</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #051d12; color: #fff; font-family: 'Arial', sans-serif; overflow-x: hidden; }
-        .green-glass { background: rgba(16, 185, 129, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .bkash-bg { background: #e2136e; }
-        .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
-        .game-card { background: #0a2e1e; border-radius: 15px; border: 1px solid #1e4d36; transition: 0.3s; }
-        .game-card:active { transform: scale(0.95); border-color: #fbbf24; }
-        .hidden { display: none; }
+        body { background: #062b1a; color: white; font-family: sans-serif; margin: 0; padding: 0; }
+        .header { background: #041d11; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1a4d36; }
+        .btn-green { background: linear-gradient(180deg, #28a745, #1e7e34); padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; }
+        .banner-slider { width: 100%; height: 160px; background: url('https://i.ibb.co/S7m4v8W/banner.jpg') center/cover; margin-top: 5px; border-radius: 10px; border: 1px solid #fbbf24; }
+        .category-bar { display: flex; overflow-x: auto; gap: 15px; padding: 15px; background: #062b1a; white-space: nowrap; }
+        .category-item { text-align: center; min-width: 60px; }
+        .category-item img { width: 35px; margin: 0 auto; opacity: 0.7; }
+        .category-item.active img { opacity: 1; filter: drop-shadow(0 0 5px #fbbf24); }
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 10px; margin-bottom: 70px; }
+        .game-card { background: #0a3d26; border-radius: 10px; border: 1px solid #1a4d36; overflow: hidden; text-align: center; padding-bottom: 5px; transition: 0.2s; }
+        .game-card:active { transform: scale(0.9); border-color: #fbbf24; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #041d11; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #1a4d36; }
+        .nav-item { text-align: center; font-size: 10px; color: #888; }
+        .nav-item.active { color: #fbbf24; }
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="max-w-md mx-auto min-h-screen relative">
+<body class="max-w-[450px] mx-auto shadow-2xl min-h-screen relative">
 
-    <div id="p-login" class="p-8 flex flex-col items-center justify-center min-h-screen">
-        <div class="mb-12 text-center animate-bounce">
-            <h1 class="text-4xl font-black text-yellow-500 italic tracking-tighter">NEWPK-LUCK</h1>
-            <p class="text-[8px] text-gray-400 tracking-[5px] uppercase">Premium Gaming</p>
+    <div class="header">
+        <div class="flex items-center gap-2">
+            <img src="https://i.ibb.co/S7m4v8W/logo.png" alt="logo" class="w-8">
+            <span class="text-yellow-500 font-black italic text-lg">NEW PK LUCK</span>
         </div>
-        <div class="w-full space-y-4">
-            <input type="text" id="u" placeholder="ইউজার নেম" class="w-full p-4 rounded-xl bg-black/40 border border-green-900 outline-none">
-            <input type="password" placeholder="পাসওয়ার্ড" class="w-full p-4 rounded-xl bg-black/40 border border-green-900 outline-none">
-            <button onclick="login()" class="w-full py-4 bg-green-600 rounded-xl font-black text-lg shadow-[0_0_20px_rgba(22,163,74,0.4)]">লগইন করুন</button>
-        </div>
-    </div>
-
-    <div id="p-home" class="hidden pb-24">
-        <div class="sticky top-0 z-50 p-4 bg-[#051d12]/90 backdrop-blur flex justify-between items-center border-b border-green-900">
-            <h2 class="text-yellow-500 font-black italic">NEWPK-LUCK</h2>
-            <div class="flex gap-2">
-                <div class="bg-black/50 px-3 py-1 rounded-lg border border-yellow-600/30 text-right">
-                    <p class="text-[7px] text-gray-400 uppercase">ব্যালেন্স</p>
-                    <p class="text-sm font-bold text-yellow-500">৳ <span id="bal">500.00</span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="p-4">
-            <div class="rounded-3xl p-6 bg-gradient-to-br from-green-800 to-black border border-yellow-500/40 relative overflow-hidden">
-                <h3 class="text-xl font-black italic mb-1">মেগা জ্যাকপট! 🧧</h3>
-                <p class="text-[10px] text-gray-300">আজই ডিপোজিট করে জিতে নিন ১ লক্ষ টাকা</p>
-                <div class="absolute -right-4 -bottom-4 text-7xl opacity-20">🎰</div>
-            </div>
-        </div>
-
-        <div class="px-6 py-4 flex justify-around">
-            <div onclick="showP('p-deposit')" class="text-center cursor-pointer"><span class="text-3xl block">📥</span><p class="text-[10px] mt-1">ডিপোজিট</p></div>
-            <div onclick="alert('ব্যালেন্স কম!')" class="text-center"><span class="text-3xl block">📤</span><p class="text-[10px] mt-1">উত্তোলন</p></div>
-            <div class="text-center"><span class="text-3xl block">🎁</span><p class="text-[10px] mt-1">বোনাস</p></div>
-        </div>
-
-        <div class="p-4 grid grid-cols-3 gap-3" id="gBox"></div>
-    </div>
-
-    <div id="p-deposit" class="hidden fixed inset-0 z-[60] bg-white text-black p-0">
-        <div class="bkash-bg p-4 flex justify-between items-center text-white">
-            <button onclick="showP('p-home')">✕</button>
-            <p class="font-bold">bKash Payment</p>
-            <div></div>
-        </div>
-        <div class="p-8 text-center">
-            <img src="https://i.ibb.co/S7m4v8W/bkash-logo.png" class="w-32 mx-auto mb-6" alt="bkash">
-            <p class="text-sm mb-2 text-gray-600 font-bold">মার্চেন্ট: NEWPK-LUCK Ltd.</p>
-            <p class="text-2xl font-black mb-8">৳ <span id="depAmt">৫০০.০০</span></p>
-            
-            <div class="text-left space-y-4">
-                <label class="text-xs font-bold text-gray-500">আপনার বিকাশ নাম্বার দিন</label>
-                <input type="number" placeholder="017XXXXXXXX" class="w-full p-4 border-b-2 border-pink-600 outline-none text-xl tracking-widest">
-                <p class="text-[10px] text-gray-400">বিকাশ পিন দিয়ে পেমেন্ট নিশ্চিত করুন। আপনার পিন কেউ জানবে না।</p>
-                <button onclick="confirmDep()" class="w-full py-4 bkash-bg text-white font-black rounded-lg mt-10">নিশ্চিত করুন</button>
-            </div>
+        <div class="flex gap-2">
+            <button class="text-xs font-bold border border-green-500 px-3 py-1 rounded-full" onclick="goLink()">LOGIN</button>
+            <button class="btn-green" onclick="goLink()">REGISTER</button>
         </div>
     </div>
 
-    <div id="toast" class="fixed bottom-20 left-4 right-4 bg-black/90 p-3 rounded-2xl border-l-4 border-yellow-500 flex items-center gap-3 hidden animate-bounce">
-        <span class="text-xl">🎉</span>
-        <p class="text-[10px]"><span id="winUser" class="font-bold text-yellow-500">Rakib</span> এইমাত্র জিতলেন ৳<span id="winVal">১২৫০</span></p>
+    <div class="px-3">
+        <div class="banner-slider flex items-center justify-center">
+            <p class="text-center font-black text-yellow-400 drop-shadow-md text-sm">প্রতিদিন রেড এনভেলাপ <br> আপনার জন্য অপেক্ষা করছে!</p>
+        </div>
     </div>
 
-    <nav class="fixed bottom-0 max-w-md w-full bg-[#051d12] border-t border-green-900 flex justify-around py-3">
-        <div class="text-yellow-500"><p class="text-xl">🏠</p></div>
-        <div class="text-gray-500"><p class="text-xl">🎰</p></div>
-        <div class="text-gray-500"><p class="text-xl">👤</p></div>
-    </nav>
+    <div class="category-bar">
+        <div class="category-item active">
+            <div class="text-2xl">🔥</div>
+            <p class="text-[10px] mt-1">HOT</p>
+        </div>
+        <div class="category-item">
+            <div class="text-2xl">🎰</div>
+            <p class="text-[10px] mt-1">SLOTS</p>
+        </div>
+        <div class="category-item">
+            <div class="text-2xl">🏏</div>
+            <p class="text-[10px] mt-1">CRICKET</p>
+        </div>
+        <div class="category-item">
+            <div class="text-2xl">🃏</div>
+            <p class="text-[10px] mt-1">LIVE</p>
+        </div>
+        <div class="category-item">
+            <div class="text-2xl">💣</div>
+            <p class="text-[10px] mt-1">MINES</p>
+        </div>
+    </div>
+
+    <div class="game-grid" id="gameBox">
+        </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <span class="text-xl block">🏠</span>
+            <span>HOME</span>
+        </div>
+        <div class="nav-item">
+            <span class="text-xl block">🎁</span>
+            <span>PROMO</span>
+        </div>
+        <div class="nav-item">
+            <span class="text-xl block">👥</span>
+            <span>REFER</span>
+        </div>
+        <div class="nav-item">
+            <span class="text-xl block">👤</span>
+            <span>ACCOUNT</span>
+        </div>
+    </div>
 
     <script>
-        function login() {
-            const u = document.getElementById('u').value;
-            if(!u) return alert("ইউজার নাম দিন!");
-            showP('p-home');
-            loadG();
-            startToast();
+        // আপনার পার্টনার লিঙ্কটি নিচের কোটেশনের ভেতর দিন
+        const affiliateLink = "https://mostbet-partners.com/registration?ref=your_id"; 
+
+        function goLink() {
+            window.location.href = affiliateLink;
         }
 
-        function showP(id) {
-            document.querySelectorAll('body > div').forEach(d => d.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        function loadG() {
-            const b = document.getElementById('gBox');
-            const icons = ["💎","🎰","🧨","🐯","🐉","🃏"];
+        function loadGames() {
+            const box = document.getElementById('gameBox');
+            const icons = ["🛩️", "🐯", "💎", "🍭", "⚽", "🃏", "🍬", "🐉", "🔱"];
+            const names = ["Aviator", "Fortune Tiger", "Gems", "Sweet Bonanza", "Saba Sports", "Super Ace", "Mines", "Dragon", "Gate of Olympus"];
+            
             for(let i=0; i<300; i++) {
-                b.innerHTML += `
-                <div class="game-card p-3" onclick="alert('গেম সার্ভার ব্যস্ত! একটু পর চেষ্টা করুন।')">
-                    <div class="h-16 bg-black/30 rounded flex items-center justify-center text-2xl mb-1">${icons[i%6]}</div>
-                    <p class="text-[8px] font-bold text-center uppercase tracking-tighter">Gold Game #${i+100}</p>
-                </div>`;
+                box.innerHTML += `
+                    <div class="game-card" onclick="goLink()">
+                        <div class="h-24 flex items-center justify-center text-4xl bg-black/20">
+                            ${icons[i % 9]}
+                        </div>
+                        <p class="text-[9px] font-bold mt-2 truncate px-1 uppercase">${names[i % 9]}</p>
+                        <p class="text-[7px] text-green-400">Winning: 98%</p>
+                    </div>
+                `;
             }
         }
-
-        function confirmDep() {
-            alert("পেমেন্ট সফল হয়েছে! ২ মিনিটের মধ্যে ব্যালেন্স যোগ হবে।");
-            showP('p-home');
-        }
-
-        function startToast() {
-            const users = ["Rifat", "Sujon", "Sumon", "Nila", "Tarek"];
-            setInterval(() => {
-                const t = document.getElementById('toast');
-                document.getElementById('winUser').innerText = users[Math.floor(Math.random()*users.length)];
-                document.getElementById('winVal').innerText = Math.floor(Math.random()*5000 + 200);
-                t.classList.remove('hidden');
-                setTimeout(() => t.classList.add('hidden'), 3000);
-            }, 8000);
-        }
+        
+        loadGames();
     </script>
 </body>
 </html>
