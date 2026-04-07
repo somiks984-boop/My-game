@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Mobile Game</title>
+<title>Ultimate Catch Game</title>
 
 <style>
 body{
@@ -22,60 +22,35 @@ border-radius:12px;
 
 #player{background:lime;}
 #bomb{background:red;}
-#bonus{background:gold;}
-
-#menu{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-}
-
-button{
-padding:10px 20px;
-font-size:16px;
-margin:5px;
-}
 
 #ui{
 position:fixed;
 top:10px;
 left:10px;
 font-size:14px;
-display:none;
 }
 
 #timer{
 position:fixed;
 top:10px;
 right:10px;
-display:none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="menu">
-<h1>Ultimate Game</h1>
-<button onclick="start()">Start Game</button>
-</div>
-
 <div id="ui">
 Score: <span id="score">0</span><br>
 High: <span id="high">0</span><br>
 Level: <span id="level">1</span><br>
-Lives: <span id="lives">3</span><br>
-<button onclick="pause()">Pause</button>
-<button onclick="restart()">Restart</button>
+Lives: <span id="lives">3</span>
 </div>
 
 <div id="timer">Time: 30</div>
 
 <div id="player" class="box"></div>
 <div id="bomb" class="box"></div>
-<div id="bonus" class="box"></div>
 
 <script>
 let score=0;
@@ -83,14 +58,12 @@ let level=1;
 let lives=3;
 let time=30;
 let speed=1000;
-let running=false;
 
 let high=localStorage.getItem("high")||0;
 document.getElementById("high").innerText=high;
 
 const player=document.getElementById("player");
 const bomb=document.getElementById("bomb");
-const bonus=document.getElementById("bonus");
 
 function move(el){
 let x=Math.random()*(window.innerWidth-60);
@@ -107,15 +80,7 @@ osc.start();
 osc.stop(ctx.currentTime+0.1);
 }
 
-function start(){
-running=true;
-document.getElementById("menu").style.display="none";
-document.getElementById("ui").style.display="block";
-document.getElementById("timer").style.display="block";
-}
-
 player.onclick=()=>{
-if(!running)return;
 score++;
 beep();
 
@@ -136,7 +101,6 @@ move(player);
 }
 
 bomb.onclick=()=>{
-if(!running)return;
 lives--;
 beep();
 
@@ -149,17 +113,7 @@ gameOver();
 move(bomb);
 }
 
-bonus.onclick=()=>{
-if(!running)return;
-score+=3;
-beep();
-document.getElementById("score").innerText=score;
-move(bonus);
-}
-
 function gameOver(){
-running=false;
-
 if(score>high){
 localStorage.setItem("high",score);
 }
@@ -168,34 +122,23 @@ alert("Game Over\nScore: "+score);
 location.reload();
 }
 
-function pause(){
-running=!running;
-}
-
-function restart(){
-location.reload();
-}
-
 setInterval(()=>{
-if(!running)return;
 move(player);
 move(bomb);
-move(bonus);
 },speed);
 
-setInterval(()=>{
-if(!running)return;
+let timer=setInterval(()=>{
 time--;
 document.getElementById("timer").innerText="Time: "+time;
 
 if(time<=0){
+clearInterval(timer);
 gameOver();
 }
 },1000);
 
 move(player);
 move(bomb);
-move(bonus);
 </script>
 
 </body>
